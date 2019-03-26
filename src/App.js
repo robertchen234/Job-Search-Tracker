@@ -1,28 +1,33 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+
+import { connect } from "react-redux";
+import { Route, Switch, withRouter } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { getUsers } from "./actions/userActions";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getUsers();
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <Route path="/users/:id" render={()=> } />
+        <Route path="/users/" />
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return { users: state.users };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { getUsers: bindActionCreators(getUsers, dispatch) };
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
