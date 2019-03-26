@@ -7,6 +7,8 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { getUsers } from "./actions/userActions";
 
+import UserContainer from "./containers/UserContainer";
+
 class App extends Component {
   componentDidMount() {
     this.props.getUsers();
@@ -15,8 +17,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route path="/users/:id" render={()=> } />
-        <Route path="/users/" />
+        <Route path="/users/:id" />
+        <Route path="/users/" render={() => <UserContainer />} />
       </div>
     );
   }
@@ -30,4 +32,9 @@ function mapDispatchToProps(dispatch) {
   return { getUsers: bindActionCreators(getUsers, dispatch) };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);
