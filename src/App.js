@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <div>
         <Route path="/users/:id" />
-        <Route path="/users/" render={() => <UserContainer />} />
+        <Route path="/users" render={() => <UserContainer />} />
       </div>
     );
   }
